@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { OrbitControls, useGLTF } from '@react-three/drei'
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
 const Experience = () => {
@@ -22,6 +22,7 @@ const Experience = () => {
   <>
  
  <OrbitControls />
+
   <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
         <planeGeometry args={[100, 100]} />
         <meshStandardMaterial color="#9EDF9C" />

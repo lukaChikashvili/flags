@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
+import { UserContext } from '../context/userContext';
 
 const Experience = () => {
+
+    const { selectedColor } = useContext(UserContext);
+
     // import truck model
      const model = useGLTF('./bus.glb');
 
@@ -11,13 +15,13 @@ const Experience = () => {
        model.scene.traverse((child) => {
         if(child.isMesh) {
             if(child.material.name === "body") {
-                child.material.color = new THREE.Color('#104C99');
+                child.material.color = new THREE.Color(selectedColor);
             }else if(child.material.name === "plastic"){
                 child.material.color = new THREE.Color('black');
             }            console.log(child.material.name)
         }
        })
-     }, [model]);
+     }, [model, selectedColor]);
    return (
   <>
  

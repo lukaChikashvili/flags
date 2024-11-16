@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import {  Settings2 } from 'lucide-react'
+import {  Settings2, X } from 'lucide-react'
 import { UserContext } from '../context/userContext'
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
          </div>
 
        <div>
-          <Settings2 className='cursor-pointer duration-500 ease hover:text-white' onClick={() => setShowModal(!showModal)} />
+          <span className='cursor-pointer duration-500 ease hover:text-white' onClick={() => setShowModal(!showModal)} >{showModal ? <X /> : <Settings2 />}</span>
         </div>
     </div> 
   )

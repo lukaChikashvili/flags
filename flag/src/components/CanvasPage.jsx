@@ -7,7 +7,7 @@ const CanvasPage = () => {
   return (
    <>
      <Canvas camera={ {
-        position: [5, 5, 5],
+        position: [5, 2, 5],
         fov: 50
      }}>
         <Lights />

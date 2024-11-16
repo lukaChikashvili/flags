@@ -3,17 +3,17 @@ import { OrbitControls, useGLTF } from '@react-three/drei'
 
 const Experience = () => {
     // import truck model
-     const model = useGLTF('./truck.glb');
+     const model = useGLTF('./bus.glb');
    return (
   <>
  
  <OrbitControls />
   <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
         <planeGeometry args={[100, 100]} />
-        <meshStandardMaterial color="lightblue" />
+        <meshStandardMaterial color="#9EDF9C" />
       </mesh>
 
-      <primitive object={model.scene} scale = {0.0045} position = {[0, 1, 0]} castshadow />
+      <primitive object={model.scene} scale = {0.6} position = {[0, 0.20, 0]} castShadow />
   </>
   )
 }

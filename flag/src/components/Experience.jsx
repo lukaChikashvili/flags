@@ -32,7 +32,7 @@ const Experience = () => {
         <meshStandardMaterial color="#9EDF9C" />
       </mesh>
 
-      <primitive object={model.scene} scale = {0.6} position = {[0, 0.20, 0]} castShadow />
+      <primitive object={model.scene} scale = {0.6} position = {[0, -0.01, 0]} castShadow />
   </>
   )
 }

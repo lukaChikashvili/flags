@@ -17,6 +17,7 @@ const Experience = () => {
      useEffect(() => {
        model.scene.traverse((child) => {
         if(child.isMesh) {
+          console.log(child)
             if(child.material.name === "body") {
                 child.material.color = new THREE.Color(selectedColor);
             }else if(child.material.name === "plastic"){
@@ -28,35 +29,35 @@ const Experience = () => {
 
      const [subscribeKeys, getKeys] = useKeyboardControls();
 
+  
+   
      useFrame((state, delta) => {
-        if(busRef.current) {
-            const {forward, backward, left, right } = getKeys();
-             const impulse = {x: 0, y: 0, z: 0};
-             const torque = {x: 0, y: 0, z: 0};
-             
+         const { forward, backward, left, right } = getKeys();
+        const impulse = { x: 0, y: 0, z: 0};
+
+        const impulseStrength = 10 * delta;
+
+        if (forward) {
+          impulse.z -= impulseStrength;
+          console.log('Moving forward');
+        }
+  
+        if (backward) {
+          impulse.z += impulseStrength;
+          console.log('Moving backward');
+        }
+
+       
+
+        busRef.current.applyImpulse(impulse, busRef.current.translation());
+
         
 
-           const impulseStrength = 0.6 * delta;
-           const torqueStrength = 0.2 * delta;
-
-           if(forward) {
-             impulse.z -= impulseStrength;
-             torque.x -= torqueStrength;
-             console.log('forward')
-           }
-
-           if(backward) {
-            impulse.z += impulseStrength;
-             torque.x += torqueStrength;
-           }
-
-
-           busRef.current.applyImpulse(impulse);
-           busRef.current.applyTorqueImpulse(torque);
-           
-        }
      });
 
+    
+
+   
   
    return (
   <>
@@ -68,8 +69,9 @@ const Experience = () => {
         <meshStandardMaterial color="#9EDF9C" />
       </mesh>
       </RigidBody>
-   <RigidBody   colliders = "hull" restitution={0.5} friction={0.8}  ref={busRef}>
-      <primitive object={model.scene} scale = {0.6} position = {[0, 10, 0]} castShadow />
+
+   <RigidBody type="dynamic"  colliders = "hull" restitution={0.5} friction={0.8} ref={busRef} >
+       <primitive object={model.scene} position = {[0, 10, 0]} scale = {0.7} />
       </RigidBody>
   </>
   )

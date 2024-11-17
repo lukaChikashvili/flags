@@ -8,25 +8,27 @@ import { KeyboardControls } from '@react-three/drei'
 const CanvasPage = () => {
   return (
    <>
-     <Canvas camera={ {
-        position: [5, 2, 5],
-        fov: 50
-     }}>
-        <Physics gravity={[0, -9.81, 0]}>
-            <KeyboardControls map={[
+     <KeyboardControls map={[
               { name: 'forward', keys: ['ArrowUp', 'w'] },
               { name: 'backward', keys: ['ArrowDown', 's'] },
               { name: 'left', keys: ['ArrowLeft', 'a'] },
               { name: 'right', keys: ['ArrowRight', 'd'] },
             ]}>
+     <Canvas camera={ {
+        position: [5, 2, 5],
+        fov: 50
+     }}>
+        <Physics gravity={[0, -9.81, 0]}>
+          
 
           
         <Lights />
         <Experience />
-        </KeyboardControls>
+        
         </Physics>
 
      </Canvas>
+     </KeyboardControls>
    </>
   )
 }

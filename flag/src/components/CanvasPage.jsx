@@ -15,7 +15,7 @@ const CanvasPage = () => {
               { name: 'right', keys: ['ArrowRight', 'd'] },
             ]}>
      <Canvas camera={ {
-        position: [5, 2, 5],
+        position: [0, 2, -10],
         fov: 50
      }}>
         <Physics gravity={[0, -9.81, 0]}>

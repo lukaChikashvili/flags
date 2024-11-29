@@ -9,15 +9,19 @@ const CanvasPage = () => {
   return (
    <>
      <KeyboardControls map={[
-              { name: 'forward', keys: ['ArrowUp', 'w'] },
-              { name: 'backward', keys: ['ArrowDown', 's'] },
-              { name: 'left', keys: ['ArrowLeft', 'a'] },
-              { name: 'right', keys: ['ArrowRight', 'd'] },
+              {name: 'forward', keys: ['ArrowUp', 'KeyW']},
+              {name: 'backward', keys: ['ArrowDown', 'KeyS']},
+              {name: 'leftward', keys: ['ArrowLeft', 'KeyA']},
+              {name: 'rightward', keys: ['ArrowRight', 'KeyD']},
+              {name: 'jump', keys: ['Space']},
             ]}>
-     <Canvas camera={ {
-        position: [0, 2, -10],
-        fov: 50
-     }}>
+     <Canvas shadows
+        camera={ {
+            fov: 45,
+            near: 0.1,
+            far:  1000,
+            position: [ 2.5, 4, 4 ]
+        } }>
         <Physics gravity={[0, -9.81, 0]}>
           
 

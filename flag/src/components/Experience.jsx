@@ -11,6 +11,7 @@ import shere from '../assets/sherekilebi.jpg'
 import udi from '../assets/udiplomo.jpg'
 import siyva from '../assets/siyvaruli.jpg'
 import mta from '../assets/mtebi.jpg'
+import SecondHall from './SecondHall'
 
 const Experience = () => {
 
@@ -18,7 +19,7 @@ const Experience = () => {
 
 let body = useRef(null);
 
-
+// first hall movies
 const abez = useTexture(abezara);
 const roman = useTexture(romani);
 
@@ -28,6 +29,8 @@ const udiplomo = useTexture(udi);
 const siyvaruli = useTexture(siyva);
 const cisferi = useTexture(mta);
 
+// first hall movie posters
+
 const movies = [
   {title: "აბეზარა", img: abez},
   {title: "მხიარული რომანი", img: roman},
@@ -35,7 +38,11 @@ const movies = [
   {title: "უდიპლომო სასიძო", img: udiplomo},
   {title: "ცისფერი მთები", img: cisferi},
   {title: "სიყვარული ყველას უნდა", img: siyvaruli},
-]
+];
+
+
+// second hall movies
+
 
 
     const uniforms = useRef({
@@ -43,6 +50,7 @@ const movies = [
       color2: { value: new THREE.Color('#B3C8CF')}
     });
 
+   
      const [subscribeKeys, getKeys] = useKeyboardControls();
 
     const jump = () => {
@@ -142,6 +150,8 @@ const movies = [
       />
   </mesh>
  </RigidBody>
+ 
+ {/* First hall   */}
 
 <RigidBody type='fixed'>
  <mesh receiveShadow position={[0, -0.5, -40]}>
@@ -151,7 +161,6 @@ const movies = [
 </mesh>
 
 </RigidBody>
-
 
 <mesh receiveShadow position={[-14.5, 5, -40]}>
 
@@ -172,7 +181,7 @@ const movies = [
 </mesh>
 
 
-{/*  movie posters   */}
+{/* first hall  movie posters   */}
 
 {movies.map((movie, index) => {
 
@@ -204,12 +213,7 @@ const movies = [
 
 
 
-
-
-
-
-
-
+<SecondHall />
 
 
  

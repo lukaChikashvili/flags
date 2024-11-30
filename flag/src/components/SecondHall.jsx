@@ -7,8 +7,8 @@ import fragment from '../shaders/SecondHall/fragment.glsl'
 const SecondHall = () => {
 
     const secondHallUniforms = useRef({
-        color1: { value: new THREE.Color('#6A1E55')},
-        color2: { value: new THREE.Color('#A64D79')}
+        color1: { value: new THREE.Color('#1F509A')},
+        color2: { value: new THREE.Color('#D4EBF8')}
       });
 
       

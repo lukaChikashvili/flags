@@ -12,6 +12,7 @@ import udi from '../assets/udiplomo.jpg'
 import siyva from '../assets/siyvaruli.jpg'
 import mta from '../assets/mtebi.jpg'
 import SecondHall from './SecondHall'
+import ThirdHall from './ThirdHall'
 
 const Experience = () => {
 
@@ -214,7 +215,7 @@ const movies = [
 
 
 <SecondHall />
-
+<ThirdHall />
 
  
   </>

@@ -21,10 +21,13 @@ const Experience = () => {
  const { setSecondHall } = useContext(UserContext);
 
 
+
 let body = useRef(null);
 
 let leftDoor = useRef();
 let rightDoor = useRef();
+
+
 
 
 // first hall movies
@@ -179,18 +182,20 @@ const movies = [
  
  <OrbitControls />
 
-<RigidBody colliders = "ball" ref={body} >
-  
-  <mesh scale={0.4} position={[0, 0, 0]} >
+<RigidBody colliders = "ball" ref={body}  >
+    <mesh scale={0.35} >
   <icosahedronGeometry args={[1, 32, 32]} />
       <meshStandardMaterial
-        color="#c0c0c0" 
-        metalness={0.8}  
-        roughness={0.1}  
-        transparency={true}  
+         
+        metalness={1}  
+        roughness={0.1}   
         opacity={0.8}  
         reflectivity={0.9} 
-        envMapIntensity={1.2}  
+        envMapIntensity={1}
+        clearcoat={1}
+        clearcoatRoughness={0}
+        transparent = {true}
+        
       />
   </mesh>
  </RigidBody>

@@ -22,7 +22,7 @@ const CanvasPage = () => {
             far:  1000,
             position: [ 2.5, 2, -4 ]
         } }>
-        <Physics gravity={[0, -9.81, 0]}>
+        <Physics gravity={[0, -9.81, 0]} >
           
 
           

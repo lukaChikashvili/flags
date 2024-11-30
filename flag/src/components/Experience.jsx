@@ -119,17 +119,20 @@ const model = useGLTF('./ball.glb');
 <RigidBody type='fixed'>
  <mesh receiveShadow position={[0, -0.5, 0]}>
  
-  <boxGeometry args={[20, 1, 100]} />
+  <boxGeometry args={[30, 1, 100]} />
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
 </mesh>
+
 </RigidBody>
-<mesh receiveShadow position={[-10.5, 5, 0]}>
 
-  <boxGeometry args={[1, 10, 100]} />
+
+<mesh receiveShadow position={[-14.5, 5, 0]}>
+
+  <boxGeometry args={[10, 10, 100]} />
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
 </mesh>
 
-<mesh receiveShadow position={[10.5, 5, 0]}>
+<mesh receiveShadow position={[14.5, 5, 0]}>
 
   <boxGeometry args={[1, 10, 100]} />
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
@@ -137,9 +140,16 @@ const model = useGLTF('./ball.glb');
 
 <mesh receiveShadow position={[0, 10.5, 0]}>
 
-  <boxGeometry args={[20, 1, 100]} />
+  <boxGeometry args={[30, 1, 100]} />
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
 </mesh>
+
+
+
+
+
+
+
 
 
 

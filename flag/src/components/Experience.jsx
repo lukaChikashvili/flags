@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Environment, OrbitControls, useGLTF, useKeyboardControls, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import vertex from '../shaders/background/vertex.glsl'
@@ -14,10 +14,12 @@ import mta from '../assets/mtebi.jpg'
 import SecondHall from './SecondHall'
 import ThirdHall from './ThirdHall'
 import gsap from 'gsap'
+import { UserContext } from '../context/userContext'
 
 const Experience = () => {
 
- 
+ const { setSecondHall } = useContext(UserContext);
+
 
 let body = useRef(null);
 
@@ -134,8 +136,20 @@ const movies = [
 
      openDoors();
    }
+
+   if(cameraPosition.z < -140) {
+      openSecondHall();
+   }
+
+ 
     
     });
+
+    const openSecondHall = () => {
+     setSecondHall(true);
+
+    }
+
 
     // door opening function
     const openDoors = () => {

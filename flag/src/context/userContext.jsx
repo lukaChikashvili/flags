@@ -3,16 +3,10 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
  const UserProvider = ({ children }) => {
-    // show modal
-    const [showModal, setShowModal] = useState(false);
-    const [selectedColor, setSelectedColor] = useState('#608BC1');
-
-    // change colors
-    const changeColors = (color) => {
-     setSelectedColor(color);
-    }
+     // second hall door animation
+     const [secondHall, setSecondHall] = useState(false);
     
-    return <UserContext.Provider value = {{ showModal, setShowModal, selectedColor, setSelectedColor, changeColors}}>
+    return <UserContext.Provider value = {{ secondHall, setSecondHall}}>
         {children }
     </UserContext.Provider>
 }

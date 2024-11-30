@@ -1,18 +1,41 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import { Environment, OrbitControls, useGLTF, useKeyboardControls } from '@react-three/drei'
+import { Environment, OrbitControls, useGLTF, useKeyboardControls, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import vertex from '../shaders/background/vertex.glsl'
 import fragment from '../shaders/background/fragment.glsl'
 import { RigidBody } from '@react-three/rapier'
 import { useFrame } from '@react-three/fiber'
+import abezara from '../assets/abezara.jpg'
+import romani from '../assets/mxiaruli.jpg'
+import shere from '../assets/sherekilebi.jpg'
+import udi from '../assets/udiplomo.jpg'
+import siyva from '../assets/siyvaruli.jpg'
+import mta from '../assets/mtebi.jpg'
 
 const Experience = () => {
 
  
 
 let body = useRef(null);
-const model = useGLTF('./ball.glb');
 
+
+const abez = useTexture(abezara);
+const roman = useTexture(romani);
+
+const sherekilebi = useTexture(shere);
+const udiplomo = useTexture(udi);
+
+const siyvaruli = useTexture(siyva);
+const cisferi = useTexture(mta);
+
+const movies = [
+  {title: "აბეზარა", img: abez},
+  {title: "მხიარული რომანი", img: roman},
+  {title: "შერეკილები", img: sherekilebi},
+  {title: "უდიპლომო სასიძო", img: udiplomo},
+  {title: "ცისფერი მთები", img: cisferi},
+  {title: "სიყვარული ყველას უნდა", img: siyvaruli},
+]
 
 
     const uniforms = useRef({
@@ -79,11 +102,12 @@ const model = useGLTF('./ball.glb');
     const cameraPosition = new THREE.Vector3();
     cameraPosition.copy(bodyPosition);
     cameraPosition.z += 2.25;
-    cameraPosition.y += 0.65;
+  cameraPosition.y += 0.5;
 
     const cameraTarget = new THREE.Vector3();
     cameraTarget.copy(bodyPosition);
     cameraTarget.y += 0.25;
+    
 
   
     state.camera.position.copy(cameraPosition);
@@ -93,7 +117,10 @@ const model = useGLTF('./ball.glb');
     })
 
 
-   
+    const leftWallPos = [-10, 4.5, -70];  
+    const rightWallPos = [14.5, 4.5, -70];
+
+    const distanceBetweenPosters = 25;
   
    return (
   <>
@@ -102,7 +129,7 @@ const model = useGLTF('./ball.glb');
 
 <RigidBody colliders = "ball" ref={body} >
   
-  <mesh scale={0.4} >
+  <mesh scale={0.4} position={[0, 0, 0]} >
   <icosahedronGeometry args={[1, 32, 32]} />
       <meshStandardMaterial
         color="#c0c0c0" 
@@ -117,7 +144,7 @@ const model = useGLTF('./ball.glb');
  </RigidBody>
 
 <RigidBody type='fixed'>
- <mesh receiveShadow position={[0, -0.5, 0]}>
+ <mesh receiveShadow position={[0, -0.5, -40]}>
  
   <boxGeometry args={[30, 1, 100]} />
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
@@ -126,23 +153,55 @@ const model = useGLTF('./ball.glb');
 </RigidBody>
 
 
-<mesh receiveShadow position={[-14.5, 5, 0]}>
+<mesh receiveShadow position={[-14.5, 5, -40]}>
 
   <boxGeometry args={[10, 10, 100]} />
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
 </mesh>
 
-<mesh receiveShadow position={[14.5, 5, 0]}>
+<mesh receiveShadow position={[14.5, 5, -40]}>
 
   <boxGeometry args={[1, 10, 100]} />
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
 </mesh>
 
-<mesh receiveShadow position={[0, 10.5, 0]}>
+<mesh receiveShadow position={[0, 10.5, -40]}>
 
   <boxGeometry args={[30, 1, 100]} />
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
 </mesh>
+
+
+{/*  movie posters   */}
+
+{movies.map((movie, index) => {
+
+  if (index % 2 === 0) {
+    return (
+      <mesh
+        key={index}
+        receiveShadow
+        position={[leftWallPos[0], leftWallPos[1], leftWallPos[2] + (index / 2) * distanceBetweenPosters]}
+      >
+        <boxGeometry args={[1.2, 7, 20]} />
+        <meshStandardMaterial map={movie.img} />
+      </mesh>
+    );
+  }
+  
+
+  return (
+    <mesh
+      key={index}
+      receiveShadow
+      position={[rightWallPos[0], rightWallPos[1], rightWallPos[2] + ((index - 1) / 2) * distanceBetweenPosters]}
+    >
+      <boxGeometry args={[1.2, 7, 20]} />
+      <meshStandardMaterial map={movie.img} />
+    </mesh>
+  );
+})}
+
 
 
 

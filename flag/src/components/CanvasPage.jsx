@@ -20,7 +20,7 @@ const CanvasPage = () => {
             fov: 45,
             near: 0.1,
             far:  1000,
-            position: [ 2.5, 6, -3 ]
+            position: [ 2.5, 2, -4 ]
         } }>
         <Physics gravity={[0, -9.81, 0]}>
           

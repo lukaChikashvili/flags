@@ -13,12 +13,17 @@ import siyva from '../assets/siyvaruli.jpg'
 import mta from '../assets/mtebi.jpg'
 import SecondHall from './SecondHall'
 import ThirdHall from './ThirdHall'
+import gsap from 'gsap'
 
 const Experience = () => {
 
  
 
 let body = useRef(null);
+
+let leftDoor = useRef();
+let rightDoor = useRef();
+
 
 // first hall movies
 const abez = useTexture(abezara);
@@ -29,6 +34,8 @@ const udiplomo = useTexture(udi);
 
 const siyvaruli = useTexture(siyva);
 const cisferi = useTexture(mta);
+
+
 
 // first hall movie posters
 
@@ -122,8 +129,30 @@ const movies = [
     state.camera.position.copy(cameraPosition);
     state.camera.lookAt(cameraTarget);
 
+   if(cameraPosition.z < -50) {
+     // open doors
 
-    })
+     openDoors();
+   }
+    
+    });
+
+    // door opening function
+    const openDoors = () => {
+      gsap.to(leftDoor.current.position, {
+        x: -40,
+        duration: 0.8,
+        ease: "power2.inOut",
+      });
+      gsap.to(rightDoor.current.position, {
+        x: 40,
+        duration: 0.8,
+        ease: "power2.inOut",
+      });
+    }
+
+
+
 
 
     const leftWallPos = [-10, 4.5, -70];  
@@ -211,6 +240,20 @@ const movies = [
     </mesh>
   );
 })}
+
+
+{/* hall doors   */}
+
+<mesh ref={leftDoor} position={[-4, 0, -90]} >
+  <planeGeometry args={[13, 20]} />
+  <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
+  
+</mesh>
+
+<mesh ref = {rightDoor} position={[9, 0, -90]} >
+  <planeGeometry args={[12.9, 20]} />
+  <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
+</mesh>
 
 
 

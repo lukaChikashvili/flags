@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import vertex from '../shaders/background/vertex.glsl'
 import fragment from '../shaders/background/fragment.glsl'
 import { RigidBody } from '@react-three/rapier'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import abezara from '../assets/abezara.jpg'
 import romani from '../assets/mxiaruli.jpg'
 import shere from '../assets/sherekilebi.jpg'
@@ -15,6 +15,7 @@ import SecondHall from './SecondHall'
 import ThirdHall from './ThirdHall'
 import gsap from 'gsap'
 import { UserContext } from '../context/userContext'
+import Movie from './Movie'
 
 const Experience = () => {
 
@@ -86,10 +87,17 @@ const movies = [
      }, []);
 
      const [moveCamera, setMoveCamera] = useState(false);
+     const [aboutText, setAboutText] = useState(null);
+     const [aboutImg, setAboutImg] = useState(null);
 
 
-     const handleCamera = () => {
+     const handleCamera = (title, img) => {
         setMoveCamera(true);
+         setAboutText(title);
+         setAboutImg(img.source.data.src);
+
+        
+
      }
       
    
@@ -148,8 +156,10 @@ const movies = [
     cameraTarget.y += 0.25;
 
     if (moveCamera) {
-     cameraTarget.y += 0.5;
-      console.log(cameraTarget.y)
+        
+       animateCamera(cameraPosition);
+       
+
     }
   
     state.camera.position.copy(cameraPosition);
@@ -206,6 +216,12 @@ const movies = [
     const handleMouseLeave = () => {
       setHoveredPoster(null);
     };
+
+    
+  const animateCamera = (position) => {
+     position.y -= 3
+  }
+
 
 
   
@@ -282,7 +298,7 @@ const movies = [
         position={[leftWallPos[0], leftWallPos[1], leftWallPos[2] + (index / 2) * distanceBetweenPosters]}
         onPointerOver={() => handleMouseEnter(index)}
         onPointerOut={handleMouseLeave}
-        onClick={handleCamera}
+        onClick={() => handleCamera(movie.title, movie.img)}
       >
         <boxGeometry args={[1.2, 7, 20]} />
         <meshStandardMaterial map={movie.img} />
@@ -338,6 +354,12 @@ const movies = [
   );
 })}
 
+
+ <Html wrapperClass='about'>
+  
+   {aboutText && aboutImg && <Movie title={aboutText} img = {aboutImg} />}
+  
+ </Html>
 
 {/* hall doors   */}
 

@@ -12,6 +12,7 @@
   background-color: #89A8B2;
 }
 
+
 .text {
   cursor: pointer;
 
@@ -54,4 +55,15 @@
   100% {
     transform: translateX(-50%) rotate(360deg);
   }
+}
+
+
+.about  {
+  background-color: transparent;
+  width: 100vw;
+  height: 100vh;
+  margin-left: -770px;
+  margin-top: -350px;
+ z-index: -10;
+
 }

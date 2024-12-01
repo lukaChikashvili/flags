@@ -83,10 +83,22 @@ const movies = [
               if(value) {jump();}
             }
         )
-     }, [])
+     }, []);
+
+     const [moveCamera, setMoveCamera] = useState(false);
+
+
+     const handleCamera = () => {
+        setMoveCamera(true);
+     }
+      
+   
 
 
     useFrame((state, delta) => {
+
+   
+
       const {forward, backward, rightward, leftward} = getKeys();
 
       const impulse = { x: 0, y: 0, z: 0};
@@ -125,11 +137,20 @@ const movies = [
     cameraPosition.z += 2.25;
   cameraPosition.y += 0.5;
 
+ 
+
+
+
+  
+
     const cameraTarget = new THREE.Vector3();
     cameraTarget.copy(bodyPosition);
     cameraTarget.y += 0.25;
-    
 
+    if (moveCamera) {
+     cameraTarget.y += 0.5;
+      console.log(cameraTarget.y)
+    }
   
     state.camera.position.copy(cameraPosition);
     state.camera.lookAt(cameraTarget);
@@ -147,9 +168,13 @@ const movies = [
       openSecondHall();
    }
 
- 
+
+  
+
     
     });
+
+    
 
     const openSecondHall = () => {
      setSecondHall(true);
@@ -172,7 +197,8 @@ const movies = [
     }
 
     const [hoveredPoster, setHoveredPoster] = useState(null);
-
+     
+    // poster hover animation
     const handleMouseEnter = (index) => {
       setHoveredPoster(index);
     };
@@ -180,6 +206,10 @@ const movies = [
     const handleMouseLeave = () => {
       setHoveredPoster(null);
     };
+
+
+  
+
 
     const leftWallPos = [-10, 4.5, -70];  
     const rightWallPos = [14.5, 4.5, -70];
@@ -252,6 +282,7 @@ const movies = [
         position={[leftWallPos[0], leftWallPos[1], leftWallPos[2] + (index / 2) * distanceBetweenPosters]}
         onPointerOver={() => handleMouseEnter(index)}
         onPointerOut={handleMouseLeave}
+        onClick={handleCamera}
       >
         <boxGeometry args={[1.2, 7, 20]} />
         <meshStandardMaterial map={movie.img} />
@@ -262,9 +293,9 @@ const movies = [
               >
                 <div className='text'>
                   
-                <div class="big-circle">
+                <div className="big-circle">
                   
-                 <div class="small-circle"></div>
+                 <div className="small-circle"></div>
                </div>
                 </div>
               </Html>
@@ -282,10 +313,27 @@ const movies = [
     <mesh
       key={index}
       receiveShadow
+      onPointerOver={() => handleMouseEnter(index)}
+      onPointerOut={handleMouseLeave}
+      
       position={[rightWallPos[0], rightWallPos[1], rightWallPos[2] + ((index - 1) / 2) * distanceBetweenPosters]}
     >
       <boxGeometry args={[1.2, 7, 20]} />
       <meshStandardMaterial map={movie.img} />
+      {hoveredPoster === index && (
+              <Html
+                position={[0, 0, 1.5]} 
+                center
+              >
+                <div className='text'>
+                  
+                <div className="big-circle">
+                  
+                 <div className="small-circle"></div>
+               </div>
+                </div>
+              </Html>
+            )}
     </mesh>
   );
 })}

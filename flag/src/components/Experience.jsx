@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Environment, OrbitControls, useGLTF, useKeyboardControls, useTexture } from '@react-three/drei'
+import { Environment, Html, OrbitControls, useGLTF, useKeyboardControls, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import vertex from '../shaders/background/vertex.glsl'
 import fragment from '../shaders/background/fragment.glsl'
@@ -140,6 +140,9 @@ const movies = [
      openDoors();
    }
 
+
+ 
+
    if(cameraPosition.z < -140) {
       openSecondHall();
    }
@@ -168,9 +171,15 @@ const movies = [
       });
     }
 
+    const [hoveredPoster, setHoveredPoster] = useState(null);
 
-
-
+    const handleMouseEnter = (index) => {
+      setHoveredPoster(index);
+    };
+  
+    const handleMouseLeave = () => {
+      setHoveredPoster(null);
+    };
 
     const leftWallPos = [-10, 4.5, -70];  
     const rightWallPos = [14.5, 4.5, -70];
@@ -236,14 +245,35 @@ const movies = [
 
   if (index % 2 === 0) {
     return (
+      <>
       <mesh
         key={index}
         receiveShadow
         position={[leftWallPos[0], leftWallPos[1], leftWallPos[2] + (index / 2) * distanceBetweenPosters]}
+        onPointerOver={() => handleMouseEnter(index)}
+        onPointerOut={handleMouseLeave}
       >
         <boxGeometry args={[1.2, 7, 20]} />
         <meshStandardMaterial map={movie.img} />
+        {hoveredPoster === index && (
+              <Html
+                position={[0, 0, 1.5]} 
+                center
+              >
+                <div className='text'>
+                  
+                <div class="big-circle">
+                  
+                 <div class="small-circle"></div>
+               </div>
+                </div>
+              </Html>
+            )}
       </mesh>
+      
+     
+      </>
+
     );
   }
   

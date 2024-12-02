@@ -50,7 +50,23 @@ const movies = [
   {title: "მხიარული რომანი", img: roman},
   {title: "შერეკილები", img: sherekilebi},
   {title: "უდიპლომო სასიძო", img: udiplomo},
-  {title: "ცისფერი მთები", img: cisferi},
+  {
+    title: "Blue Mountains ", 
+    img: cisferi, 
+    year: "1983", 
+    director: "Eldar Shengelaia",
+    plot:  `
+    Novelist Soso (Ramaz Giorgobiani) goes to his publishing house 
+    in an attempt to find someone interested in publishing his latest manuscript. 
+    The employees shuffle the author's manuscript around their office from person to person,
+     but everyone seems to be too busy to actually read it. Soso ultimately discovers that the employees
+      are wrapped up in anything but their direct duties and responsibilities so much that not even a giant 
+      structural flaw in the building can get their attention. The movie is an allegory of Soviet-time 
+      bureaucracy and Soviet system as a whole. At the end of the film, the house collapses and the employees
+       move to another, brand new and modern building. 
+    However, that does not mean they change their attitude towards their work ...
+    `
+  },
   {title: "სიყვარული ყველას უნდა", img: siyvaruli},
 ];
 
@@ -89,13 +105,17 @@ const movies = [
      const [moveCamera, setMoveCamera] = useState(false);
      const [aboutText, setAboutText] = useState(null);
      const [aboutImg, setAboutImg] = useState(null);
+     const [aboutYear, setAboutYear] = useState(null);
+     const [aboutDirector, setAboutDirector] = useState(null);
+     const [aboutPlot, setAboutPlot] = useState(null);
 
-
-     const handleCamera = (title, img) => {
+     const handleCamera = (title, img, year, director, plot) => {
         setMoveCamera(true);
          setAboutText(title);
          setAboutImg(img.source.data.src);
-
+         setAboutDirector(director);
+         setAboutYear(year); 
+         setAboutPlot(plot);
         
 
      }
@@ -298,7 +318,7 @@ const movies = [
         position={[leftWallPos[0], leftWallPos[1], leftWallPos[2] + (index / 2) * distanceBetweenPosters]}
         onPointerOver={() => handleMouseEnter(index)}
         onPointerOut={handleMouseLeave}
-        onClick={() => handleCamera(movie.title, movie.img)}
+        onClick={() => handleCamera(movie.title, movie.img, movie.year, movie.director, movie.plot)}
       >
         <boxGeometry args={[1.2, 7, 20]} />
         <meshStandardMaterial map={movie.img} />
@@ -357,7 +377,13 @@ const movies = [
 
  <Html wrapperClass='about'>
   
-   {aboutText && aboutImg && <Movie title={aboutText} img = {aboutImg} />}
+   {aboutText && aboutImg && <Movie 
+                              title={aboutText} 
+                              img = {aboutImg} 
+                              year = {aboutYear}
+                              director={aboutDirector}
+                              plot = {aboutPlot}
+                              />}
   
  </Html>
 

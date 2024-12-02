@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/pupcat');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,6 +12,7 @@
   height: 100%;
   overflow: hidden;
   background-color: #89A8B2;
+  font-family: 'Pupcat Rg', sans-serif;
 }
 
 

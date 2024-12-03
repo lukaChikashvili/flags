@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const Movie = ({ title, img, year, director, plot, closeAbout }) => {
+const Movie = ({ title, img, year, director, plot, closeAbout, showCurrentMovie  }) => {
     
 
 
@@ -19,7 +19,7 @@ const Movie = ({ title, img, year, director, plot, closeAbout }) => {
       </div>
       <p className='text-2xl text-gray-300'>{plot}</p>
 
-      <button className='bg-yellow-500 rounded-md p-2 shadow-xl text-2xl text-gray-800 font-bold'>Watch movie</button>
+      <button onClick={showCurrentMovie} className='bg-yellow-500 rounded-md p-2 shadow-xl text-2xl text-gray-800 font-bold'>Watch movie</button>
       </div>
       
 

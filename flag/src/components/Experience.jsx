@@ -16,10 +16,12 @@ import ThirdHall from './ThirdHall'
 import gsap from 'gsap'
 import { UserContext } from '../context/userContext'
 import Movie from './Movie'
+import WatchMovie from './WatchMovie'
+import Neon from './Neon'
 
 const Experience = () => {
 
- const { setSecondHall, setMoveCamera, moveCamera } = useContext(UserContext);
+ const { setSecondHall, setMoveCamera, moveCamera, showMovie, setShowMovie } = useContext(UserContext);
 
 
 
@@ -82,7 +84,8 @@ const movies = [
     consciousness and arrests Ertaoz along with the chicken. Ertaoz is sentenced to ten years in prison, 
     while the bird receives seven. In prison, they meet Khristofor, 
    an inventor who has created a flying machine that runs on the power of love instead of fuel.
-   `
+   `,
+   link: 'https://www.youtube.com/embed/t2sbqo3R7W4?si=q30sEjsX6Y4N3tkt'
   },
 
   {title: "The Diploma-less Groom", 
@@ -114,7 +117,8 @@ const movies = [
       bureaucracy and Soviet system as a whole. At the end of the film, the house collapses and the employees
        move to another, brand new and modern building. 
     However, that does not mean they change their attitude towards their work ...
-    `
+    `,
+    link: "https://www.youtube.com/embed/ftqOy8FzCg8?si=308aSKAibz_VCKE0"
   },
   {title: "Everybody Wants Love",
    img: siyvaruli,
@@ -169,8 +173,10 @@ const movies = [
      const [aboutYear, setAboutYear] = useState(null);
      const [aboutDirector, setAboutDirector] = useState(null);
      const [aboutPlot, setAboutPlot] = useState(null);
+     const [movieLink, setMovieLink] = useState(null);
+     
 
-     const handleCamera = (title, img, year, director, plot) => {
+     const handleCamera = (title, img, year, director, plot, link) => {
          setMoveCamera(true);
          setAboutText(title);
          setAboutImg(img.source.data.src);
@@ -178,6 +184,7 @@ const movies = [
          setAboutYear(year); 
          setAboutPlot(plot);
          setShowAbout(false);
+         setMovieLink(link);
         
 
      }
@@ -324,6 +331,11 @@ const [showAbout, setShowAbout] = useState(false);
   setAboutDirector(null);
   setAboutPlot(null);
     }
+
+    const displayMovie = () => {
+      setShowMovie(true);
+      hideAbout();
+    }
   
    return (
   <>
@@ -391,7 +403,7 @@ const [showAbout, setShowAbout] = useState(false);
         position={[leftWallPos[0], leftWallPos[1], leftWallPos[2] + (index / 2) * distanceBetweenPosters]}
         onPointerOver={() => handleMouseEnter(index)}
         onPointerOut={handleMouseLeave}
-        onClick={() => handleCamera(movie.title, movie.img, movie.year, movie.director, movie.plot)}
+        onClick={() => handleCamera(movie.title, movie.img, movie.year, movie.director, movie.plot, movie.link)}
       >
         <boxGeometry args={[1.2, 7, 20]} />
         <meshStandardMaterial map={movie.img} />
@@ -456,11 +468,16 @@ const [showAbout, setShowAbout] = useState(false);
                              director={aboutDirector}
                              plot = {aboutPlot}
                              closeAbout={hideAbout}
+                             showCurrentMovie={displayMovie}
                              />}
  
  </Html>}
 
 
+
+{showMovie && <Html wrapperClass='movie'>
+  <WatchMovie link = {movieLink} />
+  </Html>}
 
 
 {/* hall doors   */}
@@ -476,7 +493,7 @@ const [showAbout, setShowAbout] = useState(false);
   <shaderMaterial vertexShader={vertex} fragmentShader={fragment} uniforms={uniforms.current} />
 </mesh>
 
-
+<Neon />
 
 <SecondHall />
 <ThirdHall />

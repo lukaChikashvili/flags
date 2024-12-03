@@ -23,7 +23,7 @@ const Movie = ({ title, img, year, director, plot, closeAbout }) => {
       </div>
       
 
-       <img  src = {img} className='w-[35rem] h-[30rem] object-cover rounded-md shadow-lg shadow-gray-600' />
+       <img  src = {img} className='w-[30rem] h-[30rem] object-cover rounded-md shadow-lg shadow-gray-600' />
 
 
 <span className='absolute top-4 right-12 text-4xl text-yellow-500 cursor-pointer'

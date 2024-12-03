@@ -57,8 +57,18 @@ const movies = [
   Giorgi is captivated by her integrity and sincerity and decides to tie his future to hers.
   `
 },
-  {title: "მხიარული რომანი", 
+  {title: "A Cheerful Romance", 
   img: roman,
+  year: "1972",
+  director: "Levan khotivari",
+  plot: `
+  The plot of the film unfolds as follows: Dato is in love with Eka, the daughter of the cash 
+  courier Ipolite. Ipolite, who constantly imagines attackers everywhere, mistakenly believes that Dato
+   is a bandit. Whenever he sees him, Ipolite tries to capture him and hand him over to the police.
+    Dato and Eka, repeatedly caught in trouble because of Ipolite's suspicions, eventually marry without his 
+    permission. Ipolite is furious to see Dato as his son-in-law, but soon everything is clarified, 
+  and the happy couple sets off on their honeymoon.
+  `
   
 },
   {title: "The Eccentrics",
@@ -74,7 +84,21 @@ const movies = [
    an inventor who has created a flying machine that runs on the power of love instead of fuel.
    `
   },
-  {title: "უდიპლომო სასიძო", img: udiplomo},
+
+  {title: "The Diploma-less Groom", 
+  img: udiplomo,
+  year: "1961", 
+  director: "Levan khotivari",
+  plot:  `
+  Bichiko is a carefree village boy who has no interest in studying. The entire village considers
+   him a loafer, much to the dismay of his mother. He falls in love with Nani, but her father refuses to even 
+   consider a groom without a diploma for his daughter and has already chosen the local veterinarian as her
+    suitor. Determined, Bichiko decides to kidnap Nani, but through a misunderstanding, he ends up kidnapping 
+    her father instead. This leads to a series of comedic events that ultimately turn out well for Bichiko—at
+     one point, he ends up saving Nani's father. Realizing Bichiko's kind and compassionate nature,
+   her father finally accepts him as a suitable son-in-law.
+  `},
+
   {
     title: "Blue Mountains ", 
     img: cisferi, 
@@ -92,7 +116,19 @@ const movies = [
     However, that does not mean they change their attitude towards their work ...
     `
   },
-  {title: "სიყვარული ყველას უნდა", img: siyvaruli},
+  {title: "Everybody Wants Love",
+   img: siyvaruli,
+   year: "1980", 
+    director: "Giorgi Shengelaia",
+    plot:  `
+    After finishing her sewing school, Maqvala moves to a village in Kakheti to work.
+     The village driver, Burnuta, falls in love with her but doesn't dare to confess his feelings.
+      As the grape harvest approaches, no one has time for work because everyone in the village is in love:
+       the vineyard guards dream of marrying twin sisters, the lonely Hirxela convinces the spinster Keto to 
+       meet him secretly, Burnuta's little brother is in love with the neighbor's young daughter, and Nazo, 
+       who has been married several times, gets yet another chance at marriage.
+     The collective farm chairman scolds them all, but love is what everyone wants.
+    `},
 ];
 
 
@@ -388,7 +424,7 @@ const [showAbout, setShowAbout] = useState(false);
       receiveShadow
       onPointerOver={() => handleMouseEnter(index)}
       onPointerOut={handleMouseLeave}
-      
+      onClick={() => handleCamera(movie.title, movie.img, movie.year, movie.director, movie.plot)}
       position={[rightWallPos[0], rightWallPos[1], rightWallPos[2] + ((index - 1) / 2) * distanceBetweenPosters]}
     >
       <boxGeometry args={[1.2, 7, 20]} />

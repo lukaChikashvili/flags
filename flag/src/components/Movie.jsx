@@ -1,6 +1,11 @@
 import React from 'react'
 
-const Movie = ({ title, img, year, director, plot }) => {
+
+const Movie = ({ title, img, year, director, plot, closeAbout }) => {
+    
+
+
+
   return (
     <div className='flex items-center justify-center h-screen px-[10rem] gap-24'>
 
@@ -18,10 +23,11 @@ const Movie = ({ title, img, year, director, plot }) => {
       </div>
       
 
-       <img  src = {img} className='w-[30rem] h-[30rem] object-cover rounded-md shadow-lg shadow-gray-600' />
+       <img  src = {img} className='w-[35rem] h-[30rem] object-cover rounded-md shadow-lg shadow-gray-600' />
 
 
-<span className='absolute top-4 right-12 text-4xl text-yellow-500 cursor-pointer'>X</span>
+<span className='absolute top-4 right-12 text-4xl text-yellow-500 cursor-pointer'
+       onClick={closeAbout}>X</span>
 
     </div>
   )

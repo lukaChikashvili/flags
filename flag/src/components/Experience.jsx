@@ -19,7 +19,7 @@ import Movie from './Movie'
 
 const Experience = () => {
 
- const { setSecondHall } = useContext(UserContext);
+ const { setSecondHall, setMoveCamera, moveCamera } = useContext(UserContext);
 
 
 
@@ -46,9 +46,34 @@ const cisferi = useTexture(mta);
 // first hall movie posters
 
 const movies = [
-  {title: "აბეზარა", img: abez},
-  {title: "მხიარული რომანი", img: roman},
-  {title: "შერეკილები", img: sherekilebi},
+  {title: "Abezara", 
+  img: abez,
+  year: "1956",
+  director: "Nikoloz sanishvili",
+  plot: `
+  A cheerful but sharp-tongued driver, Lia, often encounters troubles due to her honest and straightforward 
+  nature. She publicly criticizes a young architect, Giorgi, whom she both serves and loves, 
+  leading to a conflict with the management. However, Lia resolves the situation herself. 
+  Giorgi is captivated by her integrity and sincerity and decides to tie his future to hers.
+  `
+},
+  {title: "მხიარული რომანი", 
+  img: roman,
+  
+},
+  {title: "The Eccentrics",
+   img: sherekilebi,
+   year: "1973",
+   director: "Eldar Shengelaia",
+   plot: `
+   Ertaoz Bregvadze goes to the city intending to sell a chicken and pay off his father's debts. 
+   Upon arrival, he falls instantly in love with a beautiful woman named Margalita and decides to help her
+    dispose of the body of her lover, a policeman. At the cemetery, the policeman unexpectedly regains 
+    consciousness and arrests Ertaoz along with the chicken. Ertaoz is sentenced to ten years in prison, 
+    while the bird receives seven. In prison, they meet Khristofor, 
+   an inventor who has created a flying machine that runs on the power of love instead of fuel.
+   `
+  },
   {title: "უდიპლომო სასიძო", img: udiplomo},
   {
     title: "Blue Mountains ", 
@@ -102,7 +127,7 @@ const movies = [
         )
      }, []);
 
-     const [moveCamera, setMoveCamera] = useState(false);
+    
      const [aboutText, setAboutText] = useState(null);
      const [aboutImg, setAboutImg] = useState(null);
      const [aboutYear, setAboutYear] = useState(null);
@@ -110,12 +135,13 @@ const movies = [
      const [aboutPlot, setAboutPlot] = useState(null);
 
      const handleCamera = (title, img, year, director, plot) => {
-        setMoveCamera(true);
+         setMoveCamera(true);
          setAboutText(title);
          setAboutImg(img.source.data.src);
          setAboutDirector(director);
          setAboutYear(year); 
          setAboutPlot(plot);
+         setShowAbout(false);
         
 
      }
@@ -245,12 +271,23 @@ const movies = [
 
 
   
-
+const [showAbout, setShowAbout] = useState(false);
 
     const leftWallPos = [-10, 4.5, -70];  
     const rightWallPos = [14.5, 4.5, -70];
 
     const distanceBetweenPosters = 25;
+
+
+    const hideAbout = () => {
+      setShowAbout(false);
+  setMoveCamera(false);
+  setAboutText(null);
+  setAboutImg(null);
+  setAboutYear(null);
+  setAboutDirector(null);
+  setAboutPlot(null);
+    }
   
    return (
   <>
@@ -374,18 +411,21 @@ const movies = [
   );
 })}
 
+{!showAbout &&  <Html wrapperClass='about'>
+  
+  {aboutText && aboutImg && <Movie 
+                             title={aboutText} 
+                             img = {aboutImg} 
+                             year = {aboutYear}
+                             director={aboutDirector}
+                             plot = {aboutPlot}
+                             closeAbout={hideAbout}
+                             />}
+ 
+ </Html>}
 
- <Html wrapperClass='about'>
-  
-   {aboutText && aboutImg && <Movie 
-                              title={aboutText} 
-                              img = {aboutImg} 
-                              year = {aboutYear}
-                              director={aboutDirector}
-                              plot = {aboutPlot}
-                              />}
-  
- </Html>
+
+
 
 {/* hall doors   */}
 
